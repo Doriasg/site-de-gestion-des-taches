@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from flask_wtf import FlaskForm
 from wtforms import StringField , DecimalField, BooleanField, PasswordField, SubmitField, SelectField, DateField
 from wtforms.validators import DataRequired, Length, EqualTo
@@ -24,3 +25,13 @@ class update(FlaskForm):
     deadline = DateField('Date limite', validators=[DataRequired()])
     done = BooleanField(' ', default=False)
     submit = SubmitField('Modifier la tâche')
+=======
+from flask_wtf import FlaskForm
+from wtforms import StringField , DecimalField, BooleanField
+from wtforms.validators import DataRequired, Length
+
+class TaskForm(FlaskForm):
+    name = StringField('Nom de la tache', validators = [DataRequired(), Length(min=2, max=50)])
+    deadline = StringField('Date limite', validators = [DataRequired(), Length(min=5, max=10)])
+    done = BooleanField(' ', default=False)
+>>>>>>> 1cdae11572f267d8d04bb1999e4744b665ab772c
