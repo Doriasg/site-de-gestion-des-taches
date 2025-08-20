@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block content %}
+<div class=" ">
+    <div class=" ">
+       {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, msg in messages %}
+            <div class="alert alert-{{ category }}">
+                {{ msg }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+    </div>
+    <div class="m-5 ">
+        {%if user%}
+        <h2 class="text-center" >Bienvenue {{user.nom}} {{user.prenoms}} </h2>
+        {%if tasks %}
+        <p class="mt-5">Voici les taches qu'il vous restent à réaliser</p>
+       
+            {% for task in tasks %}
+            {%if not task.done %}
+               <p>{{ task.name }} -{{ task.deadline.strftime('%Y-%m-%d') }}</p> 
+            {%endif%}
+            {% endfor %}
+        {%else%}
+            <p>Vous n'avez aucune tâche.</p>
+        {%endif%}
+         {%endif%}
+         <div>
+            <h3>Des personnes que vous pourriez connaitre
+         </h3>
+        {% for user in others_users %}
+           <div class="m-m bg-body">
+               <h3>{{ user.nom }} {{ user.prenoms }}</h3>
+               <p>Email: {{ user.email }}</p>
+           </div>
+         </div>
+         
+        {% endfor %}
+    </div>
+</div>
+   
+{%endblock%}

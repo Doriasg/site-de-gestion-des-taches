@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Modifier{% endblock %}
+ {% block content %}
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category , message in messages %}
+    {% if category == 'danger' %}
+    <div class="alert alert-danger">
+        {{ message }}
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+        <div>
+            <h1 class="text-center">Modifier la tache</h1>
+            <form method="POST" class="m-4">
+                {{update.hidden_tag()}}
+                {{update.name.label}} {{update.name(class="form-control form-control-sm", placeholder="Nom")}}
+                {{update.deadline.label}} {{update.deadline(class="form-control form-control-sm", placeholder="YYYY-MM-DD")}}
+                {% if update.done.errors %}
+                <div class="alert alert-danger">
+                    {% for error in update.done.errors %}
+                    <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+               {{update.submit(class="btn btn-primary mt-3") }}
+            </form>
+            <a href="{{url_for('accueil')}}">Retourner à la page d'accueil</a>
+        </div>
+{%endblock%}

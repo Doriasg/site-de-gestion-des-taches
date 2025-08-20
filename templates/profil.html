@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Profil{% endblock %}
+
+{% block content %}
+<div>
+    <div class="text-center mt-4 align-items-center">
+    {% if user.photo_url %}
+        <img src="{{ user.photo_url }}" alt="Photo de profil" class="rounded-circle" width="120" height="120">
+    {% else %}
+        {% if user.sexe == 'F' %}
+            <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center">
+                <i class="bi bi-person-fill"></i>
+            </div>
+        {% else %}
+            <div class="rounded-circle bg-dark d-flex align-items-center justify-content-center">
+                <i class="bi bi-person-fill"></i>
+            </div>
+        {% endif %}
+    {% endif %}
+    <h3 class="mt-3">{{ user.nom }} {{ user.prenoms }}</h3>
+</div>
+    <div class="text-center mt-3">
+        <p>Email: {{ user.email }}</p>
+        <p>Sexe: {{ user.sexe }}</p>    </div>
+
+    <div class="text-center mt-4">
+        <a href="" class="btn btn-primary">Modifier le profil</a>
+        <a href="{{ url_for('accueil') }}" class="btn btn-secondary">Retour à l'accueil</a>
+    </div>
+</div>
+{%endblock%}
